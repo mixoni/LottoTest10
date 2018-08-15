@@ -37,7 +37,7 @@ var server = app.listen(app.get('port'), function() {
     console.log("server start on port" + app.get('port'));
 });
 
-/*app.get("/api/GetNumbers", function (req, res) {
+app.get("/api/GetNumbers", function (req, res) {
       res.json({ numbers: currentSelectedNumbers}) 
 });
 
@@ -54,7 +54,7 @@ app.get("/api/GetRemainingTime", function (req, res) {
 
 app.get("/api/GetCurrentScene", function (req, res) {
 
-});*/     
+});     
 
 app.get("/api/GetData", (req, res) => {
     let data = GetDataFromFile(fileAnimationConfigs);

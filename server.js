@@ -58,7 +58,7 @@ app.get("/api/GetData", (req, res) => {
 });
 
 function GetDataFromFile(xmlFile){
-    console.log('GetDataFromFile');
+    console.log('GetDataFromFile'); 
     const xml = fs.readFileSync(xmlFile, 'utf-8');
     console.log('readFileSync');    
     //this returns json and log it

@@ -42,8 +42,8 @@ app.get("/api/GetNumbers", function (req, res) {
 });
 
 app.get("/api/GetRemainingTime", function (req, res) {
-        /*let data = GetDataFromFile(fileAnimationConfigs);        
-        let nextStart = moment(data.root.NextStart,"DD/MM/YYYY hh:mm:ss");
+        let data = GetDataFromFile(fileAnimationConfigs);        
+        /*let nextStart = moment(data.root.NextStart,"DD/MM/YYYY hh:mm:ss");
         var now  = moment();
 
         let remainingTimeInSec = now.diff(nextStart, 'seconds');*/
@@ -69,10 +69,12 @@ app.get("/data", (req, res) => {
 
 
 function GetDataFromFile(xmlFile){
-    const xml = fs.readFileSync(xmlFile, 'utf-8')
+    console.log('GetDataFromFile');
+    const xml = fs.readFileSync(xmlFile, 'utf-8');
+    console.log('readFileSync');    
     //this returns json and log it
     var json = parserJS.toJson(xml)
-    
+    console.log('parserJS.toJson(xml)');
     // this parse json to javascript object and log it
     console.log(JSON.parse(json))
     let jsObject = JSON.parse(json);

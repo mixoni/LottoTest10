@@ -42,13 +42,13 @@ app.get("/api/GetNumbers", function (req, res) {
 });
 
 app.get("/api/GetRemainingTime", function (req, res) {
-        let data = GetDataFromFile(fileAnimationConfigs);        
+        /*let data = GetDataFromFile(fileAnimationConfigs);        
         let nextStart = moment(data.root.NextStart,"DD/MM/YYYY hh:mm:ss");
         var now  = moment();
 
-        let remainingTimeInSec = now.diff(nextStart, 'seconds');
+        let remainingTimeInSec = now.diff(nextStart, 'seconds');*/
         
-        res.json({ remainingTime:remainingTimeInSec < 0 ? 0 : remainingTimeInSec });
+        res.json({ remainingTime:10 });
 
 });  
 

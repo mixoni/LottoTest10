@@ -50,23 +50,12 @@ app.get("/api/GetRemainingTime", function (req, res) {
         
         res.json({ remainingTime:10 });
 
-});  
-
-app.get("/api/GetCurrentScene", function (req, res) {
-
-});     
+});    
 
 app.get("/api/GetData", (req, res) => {
     let data = GetDataFromFile(fileAnimationConfigs);
     res.json(data);
 });
-
-app.get("/data", (req, res) => {
-    let data = GetDataFromFile(fileAnimationConfigs);
-    return data.root.NextStart;
-})
-
-
 
 function GetDataFromFile(xmlFile){
     console.log('GetDataFromFile');

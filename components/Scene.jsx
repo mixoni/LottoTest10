@@ -69,8 +69,15 @@ class Scene extends React.Component {
         {
             fitByResolution = (fitByResolution + fitByResolution/2) * 2;
         }
-
-        fetch("api/GetData")
+        this.setState({ component : <div>
+                         <ReactCountdownClock seconds={10}
+                         color="#4fc3f7"
+                         alpha={0.9}
+                         showMilliseconds = false
+                         size={fitByResolution}
+                         onComplete={this.RenderAnimationScene} />
+                         </div>});
+       /* fetch("api/GetData")
           .then(res => res.json())
           .then(
             (result) => {              
@@ -87,31 +94,37 @@ class Scene extends React.Component {
             (error) => {
               console.log(error);
             }
-          )       
+          ) */      
     }
     
     RenderAnimationScene = () => {
         this.setCurrentScene("RenderAnimationScene");
-
+        this.setState({ component : <Animation data={result.root} numbers={[1,2,14,33,36,21,11,27,6,39,17,40,22,10,7,34,25,15,5,38]} onComplete = {this.RenderLastThreeResultsScene} /*onTimerExpired={this.RenderCountdownScene}*/ /> })  
         //--- get remaining time for counter
-         fetch("api/GetData")
+         /*fetch("api/GetData")
           .then(res => res.json())
           .then(
             (result) => {
               let numbers = [...result.root.NextNumbers.split(',')];// result.root.NextNumbers.split(",");
               console.log('numbers: ' + numbers);
               this.setState({ component : <Animation data={result.root} numbers={numbers} onComplete = {this.RenderLastThreeResultsScene} /*onTimerExpired={this.RenderCountdownScene}*/ /> })              
-            },
+            /*},
             (error) => {
               console.log(error);
             }
-          )
+          )*/
     }
    RenderLastThreeResultsScene = () => {
         this.setCurrentScene("RenderLastThreeResultsScene");
         this.clearLocalStorageKey("numbersInProgress");
+         console.log('GetData returns: ' + result);
+              let lastThree = result.root.PreviusGameNumbers.numbers;
+              let seconds =  this.getRemainingTime(result.root.NextStart);
+              let sceneTime = result.root.SceneTime.RenderLastThreeResultsScene;
+              console.log('scene time: ' + sceneTime);
 
-        fetch("api/GetData")
+              this.setState({ component : <Results lastThree={lastThree} remainingTime={15} sceneTime={sceneTime} onComplete = {this.RenderStatisticsScene} onTimerExpired={this.RenderStatisticsScene} /> }) 
+        /*fetch("api/GetData")
           .then(res => res.json())
           .then((result) => {
               console.log('GetData returns: ' + result);
@@ -125,14 +138,16 @@ class Scene extends React.Component {
             (error) => {
               console.log(error);
             }
-          )        
+          )   */     
    }
 
    RenderStatisticsScene = () => {
         this.setCurrentScene("RenderStatisticsScene");
         this.clearLocalStorageKey("numbersInProgress");
-
-        fetch("api/GetData")
+        this.setState({ component : 
+                    <Statistics  remainingTime={15} sceneTime={sceneTime} onComplete = {this.RenderCountdownScene}  onTimerExpired={this.RenderCountdownScene} />
+              });   
+        /*fetch("api/GetData")
           .then(res => res.json())
           .then((result) => {
               console.log('GetData returns: ' + result);
@@ -146,7 +161,7 @@ class Scene extends React.Component {
             },
             (error) => {
               console.log(error);
-            }
+            }*/
         )          
    }
         
